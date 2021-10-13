@@ -37,7 +37,7 @@ class DevQuizControllerTest {
 
     @BeforeEach
     public void clearDb() {
-        questionRepo.clear();
+        questionRepo.deleteAll();
     }
 
     @LocalServerPort
@@ -48,9 +48,9 @@ class DevQuizControllerTest {
     void testListQuestion() {
         // GIVEN
         when(idService.generateId()).thenReturn("1").thenReturn("2").thenReturn("3");
-        questionRepo.addQuestion(new Question("1", "Question with ID '1'", List.of()));
-        questionRepo.addQuestion(new Question("2", "Question with ID '2'", List.of()));
-        questionRepo.addQuestion(new Question("3", "Question with ID '3'", List.of()));
+        questionRepo.save(new Question("1", "Question with ID '1'", List.of()));
+        questionRepo.save(new Question("2", "Question with ID '2'", List.of()));
+        questionRepo.save(new Question("3", "Question with ID '3'", List.of()));
         // WHEN
         ResponseEntity<Question[]> responseEntity = testRestTemplate.getForEntity("/api/question", Question[].class);
         // THEN
@@ -70,7 +70,7 @@ class DevQuizControllerTest {
         // GIVEN
         Question question = new Question("302", "Question with ID '302'", List.of());
         when(idService.generateId()).thenReturn("302");
-        questionRepo.addQuestion(question);
+        questionRepo.save(question);
         // WHEN
         ResponseEntity<Question> responseEntity = testRestTemplate.getForEntity("/api/question/" + question.getId(), Question.class);
         // THEN
