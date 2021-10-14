@@ -53,7 +53,7 @@ jobs:
     needs: build-backend
     environment:
       name: production-heroku
-      url: https://rem-java-21-4-dev-quiz-mongodb.herokuapp.com/
+      url: https://dev-quiz-as.herokuapp.com/
     env:
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     steps:
@@ -65,6 +65,6 @@ jobs:
       - name: Login to heroku
         run: heroku container:login
       - name: Push docker container
-        run: heroku container:push web -a rem-21-4-dev-quiz-mongodb
+        run: heroku container:push web -a dev-quiz-as
       - name: Deploy docker container
-        run: heroku container:release web -a rem-21-4-dev-quiz-mongodb
+        run: heroku container:release web -a dev-quiz-as
