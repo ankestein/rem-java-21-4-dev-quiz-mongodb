@@ -8,8 +8,7 @@ export default function Question({question}) {
 
     const [correctStatus, setCorrectStatus] = useState();
     const [selectedAnswerId, setSelectedAnswerId] = useState();
-
-
+    const [correctAnswerId, setCorrectAnswerId] = useState();
 
 
     /*
@@ -29,30 +28,42 @@ export default function Question({question}) {
 
      */
 
-    const handleClick = () => {
+    /*const handleClick = () => {
         document.getElementById("feedback").innerText = correctStatus
     }
 
+     */
+
+    /*const handleClick = event => {
+        event.preventDefault()
+        setSelectedAnswerId({answer}.id)
+    }
+
+     */
+
     return (
         <BackgroundContainer>
-            <QuestionContainer correctStatus={correctStatus}>
-                <h3>{question.questionText}</h3>
-                <AnswerContainer>
-                    {question.answers.map(answer => (
-                        <Answer answer={answer}
-                                key={answer.id}
-                                questionId={question.id}
-                                correctStatus={correctStatus}
-                                setCorrectStatus={setCorrectStatus}
-                                selectedAnswerId={selectedAnswerId}
-                                setSelectedAnswerId={setSelectedAnswerId}
-                        />
-                    ))}
+            <QuestionContainer correctAnswerId={correctAnswerId}  correctStatus={correctStatus}>
+                {/*<form >*/}
+                    <h3>{question.questionText}</h3>
+                    <AnswerContainer>
+                        {question.answers.map(answer => (
+                            <Answer answer={answer}
+                                    key={answer.id}
+                                    questionId={question.id}
+                                    correctStatus={correctStatus}
+                                    setCorrectStatus={setCorrectStatus}
+                                    selectedAnswerId={selectedAnswerId}
+                                    setSelectedAnswerId={setSelectedAnswerId}
+                                    correctAnswerId={correctAnswerId}
+                                    setCorrectAnswerId={setCorrectAnswerId}
+                            />
+                        ))}
 
-                </AnswerContainer>
-                <h4 id="feedback"></h4>
-                <CheckButton onClick={() => handleClick()}>Check Answer</CheckButton>
-
+                    </AnswerContainer>
+                    <h4 id="feedback"></h4>
+                    <CheckButton>Check Answer</CheckButton>
+                {/*</form>*/}
             </QuestionContainer>
         </BackgroundContainer>
     )

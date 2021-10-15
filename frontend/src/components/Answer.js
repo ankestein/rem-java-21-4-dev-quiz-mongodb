@@ -13,30 +13,53 @@ Answer.propTypes = {
     correctStatus: PropTypes.bool,
     setCorrectStatus: PropTypes.func,
     selectedAnswerId: PropTypes.string,
-    setSelectedAnswerId: PropTypes.func
+    setSelectedAnswerId: PropTypes.func,
+    correctAnswerId: PropTypes.string,
+    setCorrectAnswerId: PropTypes.func,
 }
 
 
-export default function Answer({ answer, questionId, correctStatus, setCorrectStatus, selectedAnswerId, setSelectedAnswerId }) {
+export default function Answer({ answer, questionId, correctStatus, setCorrectStatus, selectedAnswerId, setSelectedAnswerId, correctAnswerId, setCorrectAnswerId }) {
 
-    const handleClick = () => {
-        setCorrectStatus(answer.isCorrect)
-        setSelectedAnswerId(answer.id)
-        console.log("handleClick executed!")
+
+    /*const handleClick = () => {
+        if (name.checked) {
+            if (name.value === true) {
+                name.nextSibling.style.color="purple"
+            }
+        }
+    }
+
+     */
+
+    const handleClick = (event) => {
+        console.log(event.target.value)
         console.log(answer)
+        console.log(`checked: ${event.target.checked}`)
+        setCorrectStatus(answer.isCorrect)
+
+        if (event.target.value === true) {
+            setCorrectAnswerId(answer.id)
+
+        }
         console.log(correctStatus)
         console.log(selectedAnswerId)
+
     }
 
   return (
-    <AnswerContainer>
-      <input type="radio" onChange={() => handleClick()} name={questionId} value={answer} />
+    <AnswerContainer >
+      <input type="radio" onChange={(event) => handleClick(event)} name={questionId} value={answer.isCorrect} />
       <h4>{answer.answerText}</h4>
     </AnswerContainer>
   )
 }
 
-
+/*
+background-color: ${correctAnswerId =>
+  correctAnswerId === true ? "lightgreen" : "blue"}
+;
+ */
 
 const AnswerContainer = styled.section`
   display: flex;
