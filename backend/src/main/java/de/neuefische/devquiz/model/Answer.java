@@ -11,8 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 
 public class Answer {
-    private String id;
+    private String id = UUID.randomUUID().toString();
     private String answerText;
     private Boolean isCorrect;
-
 }
