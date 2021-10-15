@@ -3,42 +3,59 @@ import Answer from './Answer'
 import styled from 'styled-components'
 import {useState} from "react";
 
-export default function Question({ question }) {
+
+export default function Question({question}) {
 
     const [correctStatus, setCorrectStatus] = useState();
-/*
-    function changeColor({correctStatus}) {
-        let backgroundColor = "grey";
-        switch(
-            case correctStatus === true:
-                backgroundColor = "green";
-                break;
-            case correctStatus === false:
-                backgroundColor = "red";
-                break;
-            )
-                setCorrectStatus();
-        return backgroundColor;
+    const [selectedAnswerId, setSelectedAnswerId] = useState();
+
+
+
+
+    /*
+        function changeColor({correctStatus}) {
+            let backgroundColor = "grey";
+            switch(
+                case correctStatus === true:
+                    backgroundColor = "green";
+                    break;
+                case correctStatus === false:
+                    backgroundColor = "red";
+                    break;
+                )
+                    setCorrectStatus();
+            return backgroundColor;
+        }
+
+     */
+
+    const handleClick = () => {
+        document.getElementById("feedback").innerText = correctStatus
     }
 
- */
+    return (
+        <BackgroundContainer>
+            <QuestionContainer correctStatus={correctStatus}>
+                <h3>{question.questionText}</h3>
+                <AnswerContainer>
+                    {question.answers.map(answer => (
+                        <Answer answer={answer}
+                                key={answer.id}
+                                questionId={question.id}
+                                correctStatus={correctStatus}
+                                setCorrectStatus={setCorrectStatus}
+                                selectedAnswerId={selectedAnswerId}
+                                setSelectedAnswerId={setSelectedAnswerId}
+                        />
+                    ))}
 
+                </AnswerContainer>
+                <h4 id="feedback"></h4>
+                <CheckButton onClick={() => handleClick()}>Check Answer</CheckButton>
 
-  return (
-    <QuestionContainer correctStatus={correctStatus}>
-      <h3>{question.questionText}</h3>
-      <AnswerContainer>
-        {question.answers.map(answer => (
-          <Answer answer={answer}
-                  key={answer.id}
-                  questionId={question.id}
-                  correctStatus={correctStatus}
-                  setCorrectStatus={setCorrectStatus}/>
-        ))}
-      </AnswerContainer>
-      <CheckButton >Check Answer</CheckButton>
-    </QuestionContainer>
-  )
+            </QuestionContainer>
+        </BackgroundContainer>
+    )
 }
 /*
 onClick={changeColor({correctStatus})}
@@ -51,12 +68,18 @@ const correctColor = {
     false: "red"
 }
 
+
 //background-color: ${props => props.correctStatus ? "green" : "red"};
 /*background-color: #EAF6FF;*/
 //background-color: ${props => correctColor[props.correctStatus]};
 
-export const QuestionContainer = styled.section`
+export const BackgroundContainer = styled.div`
   background-color: #EAF6FF;
+
+`
+
+export const QuestionContainer = styled.section`
+
   background-color: ${props => correctColor[props.correctStatus]};
   width: 400px;
   border: 1px solid #009fb7;
@@ -64,8 +87,6 @@ export const QuestionContainer = styled.section`
   padding: 20px;
   font-family: 'Montserrat', sans-serif;
 `
-
-
 
 
 const AnswerContainer = styled.section`
@@ -96,6 +117,7 @@ const CheckButton = styled.button`
     background-color: #dfdfdf;
     color: #757780;
   }
+
   &:active {
     position: relative;
     top: 1px;
