@@ -1,15 +1,23 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import {useState} from "react";
 
-function Answer({ answer, questionId }) {
+export default function Answer({ answer, questionId, correctStatus, setCorrectStatus }) {
+
+    const handleClick = () => {
+        setCorrectStatus(answer.isCorrect)
+        console.log("handleClick executed!")
+        console.log(answer)
+    }
+
   return (
     <AnswerContainer>
-      <input type="radio" name={questionId} />
+      <input type="radio" onClick={() => handleClick()} name={questionId} />
       <h4>{answer.answerText}</h4>
     </AnswerContainer>
   )
 }
-export default Answer
+
 
 const AnswerContainer = styled.section`
   display: flex;

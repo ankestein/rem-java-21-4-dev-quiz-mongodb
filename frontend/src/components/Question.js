@@ -1,30 +1,72 @@
 import * as React from 'react'
 import Answer from './Answer'
 import styled from 'styled-components'
+import {useState} from "react";
 
-function Question({ question }) {
+export default function Question({ question }) {
+
+    const [correctStatus, setCorrectStatus] = useState();
+/*
+    function changeColor({correctStatus}) {
+        let backgroundColor = "grey";
+        switch(
+            case correctStatus === true:
+                backgroundColor = "green";
+                break;
+            case correctStatus === false:
+                backgroundColor = "red";
+                break;
+            )
+                setCorrectStatus();
+        return backgroundColor;
+    }
+
+ */
+
+
   return (
-    <QuestionContainer>
+    <QuestionContainer correctStatus={correctStatus}>
       <h3>{question.questionText}</h3>
       <AnswerContainer>
         {question.answers.map(answer => (
-          <Answer answer={answer} key={answer.id} questionId={question.id} />
+          <Answer answer={answer}
+                  key={answer.id}
+                  questionId={question.id}
+                  correctStatus={correctStatus}
+                  setCorrectStatus={setCorrectStatus}/>
         ))}
       </AnswerContainer>
-      <CheckButton>Check Answer</CheckButton>
+      <CheckButton >Check Answer</CheckButton>
     </QuestionContainer>
   )
 }
-export default Question
+/*
+onClick={changeColor({correctStatus})}
 
-const QuestionContainer = styled.section`
+ */
+
+
+const correctColor = {
+    true: "green",
+    false: "red"
+}
+
+//background-color: ${props => props.correctStatus ? "green" : "red"};
+/*background-color: #EAF6FF;*/
+//background-color: ${props => correctColor[props.correctStatus]};
+
+export const QuestionContainer = styled.section`
+  background-color: #EAF6FF;
+  background-color: ${props => correctColor[props.correctStatus]};
   width: 400px;
   border: 1px solid #009fb7;
   border-radius: 20px;
   padding: 20px;
-  background-color: #EAF6FF;
-  font-family: 'Montserrat', sans-serif;;
+  font-family: 'Montserrat', sans-serif;
 `
+
+
+
 
 const AnswerContainer = styled.section`
   display: grid;
