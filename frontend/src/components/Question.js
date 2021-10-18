@@ -42,7 +42,7 @@ export default function Question({question}) {
      */
 
     return (
-        <BackgroundContainer>
+
             <QuestionContainer correctAnswerId={correctAnswerId}  correctStatus={correctStatus}>
                 {/*<form >*/}
                     <h3>{question.questionText}</h3>
@@ -62,10 +62,11 @@ export default function Question({question}) {
 
                     </AnswerContainer>
                     <h4 id="feedback"></h4>
+                {console.log(`correct status in question.js: ${correctStatus}`)}
                     <CheckButton>Check Answer</CheckButton>
                 {/*</form>*/}
             </QuestionContainer>
-        </BackgroundContainer>
+
     )
 }
 /*
@@ -83,15 +84,19 @@ const correctColor = {
 //background-color: ${props => props.correctStatus ? "green" : "red"};
 /*background-color: #EAF6FF;*/
 //background-color: ${props => correctColor[props.correctStatus]};
-
+/*
 export const BackgroundContainer = styled.div`
   background-color: #EAF6FF;
 
 `
 
+ */
+
 export const QuestionContainer = styled.section`
 
-  background-color: ${props => correctColor[props.correctStatus]};
+  background-color: ${props =>
+          typeof props.correctStatus === 'undefined' ? "grey" :
+            correctColor[props.correctStatus]};
   width: 400px;
   border: 1px solid #009fb7;
   border-radius: 20px;

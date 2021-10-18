@@ -19,7 +19,8 @@ Answer.propTypes = {
 }
 
 
-export default function Answer({ answer, questionId, correctStatus, setCorrectStatus, selectedAnswerId, setSelectedAnswerId, correctAnswerId, setCorrectAnswerId }) {
+export default function Answer({ answer, questionId, correctStatus, setCorrectStatus, selectedAnswerId,
+                                   setSelectedAnswerId, correctAnswerId, setCorrectAnswerId }) {
 
 
     /*const handleClick = () => {
@@ -33,7 +34,7 @@ export default function Answer({ answer, questionId, correctStatus, setCorrectSt
      */
 
     const handleClick = (event) => {
-        console.log(event.target.value)
+        console.log(`event target value: ${event.target.value}`)
         console.log(answer)
         console.log(`checked: ${event.target.checked}`)
         setCorrectStatus(answer.isCorrect)
@@ -42,9 +43,9 @@ export default function Answer({ answer, questionId, correctStatus, setCorrectSt
             setCorrectAnswerId(answer.id)
 
         }
-        console.log(correctStatus)
-        console.log(selectedAnswerId)
-
+        console.log(`correct status: ${correctStatus}`)
+        console.log(`selected answer id: ${selectedAnswerId}`)
+        console.log(`correct answer id: ${correctAnswerId}`)
     }
 
   return (
