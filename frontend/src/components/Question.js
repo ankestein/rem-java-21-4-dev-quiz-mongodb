@@ -11,40 +11,9 @@ export default function Question({question}) {
     const [correctAnswerId, setCorrectAnswerId] = useState();
 
 
-    /*
-        function changeColor({correctStatus}) {
-            let backgroundColor = "grey";
-            switch(
-                case correctStatus === true:
-                    backgroundColor = "green";
-                    break;
-                case correctStatus === false:
-                    backgroundColor = "red";
-                    break;
-                )
-                    setCorrectStatus();
-            return backgroundColor;
-        }
-
-     */
-
-    /*const handleClick = () => {
-        document.getElementById("feedback").innerText = correctStatus
-    }
-
-     */
-
-    /*const handleClick = event => {
-        event.preventDefault()
-        setSelectedAnswerId({answer}.id)
-    }
-
-     */
-
     return (
 
             <QuestionContainer correctAnswerId={correctAnswerId}  correctStatus={correctStatus}>
-                {/*<form >*/}
                     <h3>{question.questionText}</h3>
                     <AnswerContainer>
                         {question.answers.map(answer => (
@@ -61,18 +30,11 @@ export default function Question({question}) {
                         ))}
 
                     </AnswerContainer>
-                    <h4 id="feedback"></h4>
-                {console.log(`correct status in question.js: ${correctStatus}`)}
                     <CheckButton>Check Answer</CheckButton>
-                {/*</form>*/}
             </QuestionContainer>
 
     )
 }
-/*
-onClick={changeColor({correctStatus})}
-
- */
 
 
 const correctColor = {
@@ -80,17 +42,6 @@ const correctColor = {
     false: "red"
 }
 
-
-//background-color: ${props => props.correctStatus ? "green" : "red"};
-/*background-color: #EAF6FF;*/
-//background-color: ${props => correctColor[props.correctStatus]};
-/*
-export const BackgroundContainer = styled.div`
-  background-color: #EAF6FF;
-
-`
-
- */
 
 export const QuestionContainer = styled.section`
 

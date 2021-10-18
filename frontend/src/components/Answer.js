@@ -23,29 +23,13 @@ export default function Answer({ answer, questionId, correctStatus, setCorrectSt
                                    setSelectedAnswerId, correctAnswerId, setCorrectAnswerId }) {
 
 
-    /*const handleClick = () => {
-        if (name.checked) {
-            if (name.value === true) {
-                name.nextSibling.style.color="purple"
-            }
-        }
-    }
-
-     */
-
     const handleClick = (event) => {
-        console.log(`event target value: ${event.target.value}`)
-        console.log(answer)
-        console.log(`checked: ${event.target.checked}`)
         setCorrectStatus(answer.isCorrect)
 
         if (event.target.value === true) {
             setCorrectAnswerId(answer.id)
 
         }
-        console.log(`correct status: ${correctStatus}`)
-        console.log(`selected answer id: ${selectedAnswerId}`)
-        console.log(`correct answer id: ${correctAnswerId}`)
     }
 
   return (
@@ -56,11 +40,6 @@ export default function Answer({ answer, questionId, correctStatus, setCorrectSt
   )
 }
 
-/*
-background-color: ${correctAnswerId =>
-  correctAnswerId === true ? "lightgreen" : "blue"}
-;
- */
 
 const AnswerContainer = styled.section`
   display: flex;
