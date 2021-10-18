@@ -23,7 +23,7 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ApiError> handleNoSuchElementException(IllegalArgumentException ex) {
+    public ResponseEntity<ApiError> handleIllegalArgumentException(IllegalArgumentException ex) {
         log.error("Given input is not processable", ex);
 
         ApiError apiError = new ApiError("Given input is not processable", ex.getMessage());
@@ -32,7 +32,7 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(Throwable.class)
-    public ResponseEntity<ApiError> handleNoSuchElementException(Throwable ex) {
+    public ResponseEntity<ApiError> handleThrowable(Throwable ex) {
         log.error("Unknown Error!", ex);
 
         ApiError apiError = new ApiError("Unknown Error!", ex.getMessage());
