@@ -1,5 +1,6 @@
 package de.neuefische.devquiz.service;
 
+import de.neuefische.devquiz.model.Answer;
 import de.neuefische.devquiz.model.Question;
 import de.neuefische.devquiz.repo.QuestionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +14,25 @@ import java.util.Optional;
 public class QuestionService {
 
     private final QuestionRepo questionRepo;
+    private final IdService idService;
 
     @Autowired
-    public QuestionService(QuestionRepo questionRepo) {
+    public QuestionService(QuestionRepo questionRepo, IdService idService) {
         this.questionRepo = questionRepo;
+        this.idService = idService;
     }
 
     public List<Question> getAllQuestions() {
         return questionRepo.findAll();
     }
 
-    public Question addQuestion(Question newQuestion){
-        return questionRepo.save(newQuestion);
+    public Question addQuestion(Question newQuestion) {
+
+        for (Answer answer : newQuestion.getAnswers()) {
+            answer.setId(idService.generateId());
+        }
+        questionRepo.save(newQuestion);
+        return newQuestion;
     }
 
 

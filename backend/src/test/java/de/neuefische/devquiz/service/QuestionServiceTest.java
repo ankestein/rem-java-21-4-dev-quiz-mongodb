@@ -17,7 +17,8 @@ import static org.mockito.Mockito.*;
 class QuestionServiceTest {
 
     private final QuestionRepo questionRepo = mock(QuestionRepo.class);
-    private final QuestionService questionService = new QuestionService(questionRepo);
+    private final IdService idService = mock(IdService.class);
+    private final QuestionService questionService = new QuestionService(questionRepo, idService);
 
     @Test
     @DisplayName("returns a list of all existing questions")
